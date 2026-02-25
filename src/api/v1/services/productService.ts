@@ -49,7 +49,7 @@ export const getProductById = async (
 export const updateProduct = async (
     id: string,
     updates: Partial<Product>
-); Promise<Product | null> => {
+): Promise<Product | null> => {
     const existing = await getProductById(id);
     
     if (!existing) return null;

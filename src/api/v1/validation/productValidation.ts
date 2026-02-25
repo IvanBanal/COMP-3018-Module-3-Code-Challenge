@@ -28,5 +28,19 @@ export const createProductSchema = Joi.object({
      * ...categoryValues just means all values in the array. (A shortcut instead of writing all values)
      */
     category: Joi.string().valid(...categoryValues).required(),
-}); 
+});
 
+export const updateProductSchema = Joi.object({
+    // Optional, 2-80 characters if provided.
+    name: Joi.string().min(2).max(80).optional(),
+
+    // Optional, non-negative integer if provided.
+    quantity: Joi.number().integer().min(0).optional(),
+
+    // Optional, positive number if provided.
+    price: Joi.number().positive().precision(2).optional(),
+    
+    // Optional, must be valid category if provided.
+    category: Joi.string().valid(...categoryValues).optional(),
+
+}).min(1); // This is added because it ensures empty body fails validation. This is a simple addition for handling an Edge Case.

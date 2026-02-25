@@ -23,3 +23,13 @@ export const createProduct = async (
     };
 };
 
+export const getAllProducts = async (): Promise<Product[]> => {
+    const snapshot = await getDocuments(COLLECTION);
+
+    return snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+    })) as Product[];
+};
+
+

@@ -12,6 +12,7 @@
     "description": "",
     "dependencies": {
         "express": "^5.2.1",
+        "firebase-admin": "^13.6.1",
         "joi": "^18.0.2"
     },
     "devDependencies": {

@@ -45,3 +45,24 @@ export const getProductById = async (
     } as Product;
 };
 
+
+export const updateProduct = async (
+    id: string,
+    updates: Partial<Product>
+); Promise<Product | null> => {
+    const existing = await getProductById(id);
+    
+    if (!existing) return null;
+
+    const updatedData = {
+        ...updates,
+        updatedAt: new Date(),
+    };
+
+    await updateDocument<Product>(COLLECTION, id, updatedData);
+
+    return {
+        ...existing,
+        ...updatedData,
+    };
+};

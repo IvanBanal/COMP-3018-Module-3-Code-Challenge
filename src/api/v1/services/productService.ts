@@ -32,4 +32,16 @@ export const getAllProducts = async (): Promise<Product[]> => {
     })) as Product[];
 };
 
+export const getProductById = async (
+    id: string
+): Promise<Product | null> => {
+    const doc = await getDocumentById(COLLECTION, id);
+
+    if (!doc) return null;
+    
+    return {
+        id: doc.id,
+        ...doc.data(),
+    } as Product;
+};
 

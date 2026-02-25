@@ -1,6 +1,7 @@
 import { create } from "domain";
 import { Product } from "../models/productModel";
 import { createDocument, getDocuments, getDocumentById, updateDocument, deleteDocument } from "../repositories/firestoreRepository";
+import { exist } from "node_modules/joi/lib";
 
 const COLLECTION = "products";
 
@@ -65,4 +66,13 @@ export const updateProduct = async (
         ...existing,
         ...updatedData,
     };
+};
+
+export const deleteProductById = async (id: string): Promise<boolean> => {
+    const existing = await getProductById(id);
+
+    if (!existing) return false;
+
+    await deleteDocument(COLLECTION, id);
+    return true;
 };
